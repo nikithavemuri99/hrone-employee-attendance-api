@@ -1,26 +1,26 @@
-# Candidate kit
+# Employee Attendance & Analytics API
 
-Read in this order:
+A robust FastAPI application built for managing employee attendance, shifts, and advanced analytics using Python and MongoDB.
 
-1. `PROBLEM_STATEMENT.docx`: what you are asked to do, how it is evaluated.
-2. `openapi.yaml`: the API contract and the business rules (R1 - R10).
-3. `DATA_MODEL.md`: what is stored in MongoDB, with nine sample documents.
-4. `app/main.py`: the starter. Put **all** your code in this one file. It must start with `uvicorn app.main:app --port 8000`.
-5. `REVIEW.md`, `DECISIONS.md`: templates to fill in.
+## Features
+- **Timezone Management:** Fully configured for Indian Standard Time (IST, UTC+05:30) with microsecond truncation.
+- **Shift & Attendance Tracking:** Handles punch-in, punch-out, 10-minute late grace periods, and 30-minute overtime evaluation.
+- **Advanced Analytics:** Monthly employee summaries, department breakdowns, late leaderboards, and trend analysis powered by MongoDB aggregation pipelines.
+- **Admin Utilities:** Diagnostic endpoint explanations for contract transparency.
 
-`sample_data/` holds the nine sample documents as MongoDB Extended JSON; `sample_seed.py` loads them. The grader's dataset is
-much larger and contains cases they do not show.
+## Setup & Installation
 
-## Local setup
-```bash
-python -m venv .venv && source .venv/bin/activate
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/nikithavemuri/hrone-employee-attendance-api.git](https://github.com/nikithavemuri/hrone-employee-attendance-api.git)
+   cd hrone-employee-attendance-api
+2.Install dependencies:
 pip install -r requirements.txt
-cp .env.example .env            # set MONGO_URI / MONGO_DB (local docker: docker run -p 27017:27017 mongo:7)
-python sample_seed.py
-uvicorn app.main:app --port 8000 --reload
-```
-MongoDB **6.0 or newer** is required (the grader uses 7.0). MongoDB Atlas free tier (M0) works.
+3.Set up your .env file with your MongoDB connection string:
+MONGO_URI=mongodb://localhost:27017
+MONGO_DB=attendance_db
+4.Run the application:
+uvicorn app.main:app --reload --port 8000
+Access the interactive documentation at http://localhost:8000/docs.
 
-## Submit
-A public Git repository with `app/main.py`, `requirements.txt`, `REVIEW.md`, `DECISIONS.md` and a short `README.md`.
-No `.env`, no secrets, no Dockerfile.
+
